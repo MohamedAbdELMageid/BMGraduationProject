@@ -108,6 +108,15 @@ fun HomeScreen(homeviewmodel: HomeScreenViewModel) {
                         CustomTextField(homeviewmodel.textSt.value,
                             { change -> homeviewmodel.onValueChange(change) })
                         Spacer(modifier = Modifier.width(20.dp))
+                        DropDownList(
+                            expanded = homeviewmodel.expended.value,
+                            selectedItem = homeviewmodel.selectedItem.value,
+                            onExpandedChange = {change->homeviewmodel.onExpendChange(change)},
+                            onDropDownMenuDismiss = {},
+                            onDropDownItemClick = {click->homeviewmodel.onDropDownItemClick(click)},
+                            dropDownList = listOf("EGP","USD"),
+                            label = "Drop Down"
+                        )
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))
