@@ -22,11 +22,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.bmgproject.presentation.screens.reusableUI.CustomTextField
 import com.example.bmgproject.presentation.screens.reusableUI.DropDownList
+import com.example.bmgproject.presentation.screens.reusableUI.MainButton
+import com.example.bmgproject.presentation.screens.reusableUI.SmallButton
 
 @Composable
-fun HomeScreen(homeviewmodel: HomeScreenViewModel) {
+fun HomeScreen(
+    homeviewmodel: HomeScreenViewModel,
+    navcontroller: NavController
+) {
+
     Box(
         modifier = Modifier
             .height(405.dp)
@@ -69,13 +76,38 @@ fun HomeScreen(homeviewmodel: HomeScreenViewModel) {
             }
             Box(
                 modifier = Modifier
-                    .width(350.dp)
-                    .height(409.dp)
+                    .width(275.dp)
+                    .height(46.dp)
                     .clip(
                         AbsoluteRoundedCornerShape(
-                            10
+                            50
                         )
                     )
+                    .background(Color.LightGray)
+            ) {
+                Row {
+                    SmallButton(
+                        updateState = { homeviewmodel.updateConvertState() },
+                        text = "Convert",
+                        width = 136,
+                        height = 46
+                    )
+                    Spacer(modifier = Modifier.width(2.dp))
+                    SmallButton(
+                        updateState = {
+                            homeviewmodel.updateCompareState()
+                            navcontroller.navigate("compare")
+                        },
+                        text = "Compare",
+                        width = 136,
+                        height = 46
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .width(350.dp)
+                    .height(409.dp)
                     .background(Color.White),
             ) {
                 Column(
@@ -111,24 +143,58 @@ fun HomeScreen(homeviewmodel: HomeScreenViewModel) {
                         DropDownList(
                             expanded = homeviewmodel.expended.value,
                             selectedItem = homeviewmodel.selectedItem.value,
-                            onExpandedChange = {change->homeviewmodel.onExpendChange(change)},
-                            onDropDownMenuDismiss = {},
-                            onDropDownItemClick = {click->homeviewmodel.onDropDownItemClick(click)},
-                            dropDownList = listOf("EGP","USD"),
-                            label = "Drop Down"
+                            onExpandedChange = { homeviewmodel.onExpendChange() },
+                            onDropDownMenuDismiss = { homeviewmodel.onDismissRequest() },
+                            onDropDownItemClick = { click -> homeviewmodel.onDropDownItemClick(click) },
+                            dropDownList = listOf("EGP", "USD")
                         )
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    Text(
-                        text = "To",
-                        modifier = Modifier,
-                        color = Color.Black,
-                        fontSize = 14.sp,
-                    )
+                    Row {
+                        Text(
+                            text = "To",
+                            modifier = Modifier,
+                            color = Color.Black,
+                            fontSize = 14.sp,
+                        )
+                        Spacer(modifier = Modifier.width(120.dp))
+                        Text(
+                            text = "Amount",
+                            modifier = Modifier,
+                            color = Color.Black,
+                            fontSize = 14.sp,
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(12.dp))
+
+                    Row {
+                        DropDownList(
+                            expanded = homeviewmodel.expendedS.value,
+                            selectedItem = homeviewmodel.selectedItemS.value,
+                            onExpandedChange = { homeviewmodel.onExpendChangeS() },
+                            onDropDownMenuDismiss = { homeviewmodel.onDismissRequestS() },
+                            onDropDownItemClick = { click ->
+                                homeviewmodel.onDropDownItemClickS(
+                                    click
+                                )
+                            },
+                            dropDownList = listOf("EGP", "USD"),
+                        )
+                        Spacer(modifier = Modifier.width(20.dp))
+                        CustomTextField(homeviewmodel.textSts.value,
+                            { change -> homeviewmodel.onValueChangeS(change) })
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    MainButton(
+                        updateState = { homeviewmodel.updateConversionState() },
+                        text = "Convert"
+                    )
+
                 }
             }
 
