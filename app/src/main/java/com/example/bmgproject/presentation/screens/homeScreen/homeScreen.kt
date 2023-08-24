@@ -30,8 +30,24 @@ import com.example.bmgproject.presentation.screens.reusableUI.SmallButton
 
 @Composable
 fun HomeScreen(
-    homeviewmodel: HomeScreenViewModel,
-    navcontroller: NavController
+    updateConvertState: () -> Unit,
+    updateCompareState:()->Unit,
+    textSt:String,
+    onValueChange:(String)->Unit,
+    expended:Boolean,
+    selectedItem:String,
+    onExpendChange:()->Unit,
+    onDismissRequest:()->Unit,
+    onDropDownItemClick:(String)->Unit,
+    expendedS:Boolean,
+    selectedItemS:String,
+    onExpendChangeS:()->Unit,
+    onDismissRequestS:()->Unit,
+    onDropDownItemClickS:(String)->Unit,
+    textSts:String,
+    onValueChangeS:(String)->Unit,
+    updateConversionState:()->Unit,
+    onButtonNav:()->Unit
 ) {
 
     Box(
@@ -87,7 +103,7 @@ fun HomeScreen(
             ) {
                 Row {
                     SmallButton(
-                        updateState = { homeviewmodel.updateConvertState() },
+                        updateState = { updateConvertState() },
                         text = "Convert",
                         width = 136,
                         height = 46
@@ -95,8 +111,8 @@ fun HomeScreen(
                     Spacer(modifier = Modifier.width(2.dp))
                     SmallButton(
                         updateState = {
-                            homeviewmodel.updateCompareState()
-                            navcontroller.navigate("compare")
+                            updateCompareState()
+                            onButtonNav()
                         },
                         text = "Compare",
                         width = 136,
@@ -137,15 +153,15 @@ fun HomeScreen(
 
                     Spacer(modifier = Modifier.height(10.dp))
                     Row {
-                        CustomTextField(homeviewmodel.textSt.value,
-                            { change -> homeviewmodel.onValueChange(change) })
+                        CustomTextField(textSt,
+                            { change ->onValueChange(change) })
                         Spacer(modifier = Modifier.width(20.dp))
                         DropDownList(
-                            expanded = homeviewmodel.expended.value,
-                            selectedItem = homeviewmodel.selectedItem.value,
-                            onExpandedChange = { homeviewmodel.onExpendChange() },
-                            onDropDownMenuDismiss = { homeviewmodel.onDismissRequest() },
-                            onDropDownItemClick = { click -> homeviewmodel.onDropDownItemClick(click) },
+                            expanded = expended,
+                            selectedItem = selectedItem,
+                            onExpandedChange = {onExpendChange()},
+                            onDropDownMenuDismiss = {onDismissRequest()},
+                            onDropDownItemClick = { click -> onDropDownItemClick(click) },
                             dropDownList = listOf("EGP", "USD")
                         )
                     }
@@ -172,26 +188,26 @@ fun HomeScreen(
 
                     Row {
                         DropDownList(
-                            expanded = homeviewmodel.expendedS.value,
-                            selectedItem = homeviewmodel.selectedItemS.value,
-                            onExpandedChange = { homeviewmodel.onExpendChangeS() },
-                            onDropDownMenuDismiss = { homeviewmodel.onDismissRequestS() },
+                            expanded = expendedS,
+                            selectedItem = selectedItemS,
+                            onExpandedChange = { onExpendChangeS() },
+                            onDropDownMenuDismiss = { onDismissRequestS() },
                             onDropDownItemClick = { click ->
-                                homeviewmodel.onDropDownItemClickS(
+                                onDropDownItemClickS(
                                     click
                                 )
                             },
                             dropDownList = listOf("EGP", "USD"),
                         )
                         Spacer(modifier = Modifier.width(20.dp))
-                        CustomTextField(homeviewmodel.textSts.value,
-                            { change -> homeviewmodel.onValueChangeS(change) })
+                        CustomTextField(textSts,
+                            { change -> onValueChangeS(change) })
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))
 
                     MainButton(
-                        updateState = { homeviewmodel.updateConversionState() },
+                        updateState = { updateConversionState() },
                         text = "Convert"
                     )
 

@@ -2,6 +2,7 @@ package com.example.bmgproject.presentation.screens.homeScreen
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.navigation.compose.rememberNavController
 
 class HomeScreenViewModel : ViewModel() {
 

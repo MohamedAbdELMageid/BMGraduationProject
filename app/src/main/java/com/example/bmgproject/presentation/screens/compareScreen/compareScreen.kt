@@ -24,8 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.bmgproject.presentation.screens.reusableUI.CustomTextField
-import com.example.bmgproject.presentation.screens.reusableUI.DropDownList
-import com.example.bmgproject.presentation.screens.reusableUI.MainButton
 import com.example.bmgproject.presentation.screens.reusableUI.SmallButton
 
 @Composable
@@ -86,8 +84,10 @@ fun compareScreen(
             ) {
                 Row {
                     SmallButton(
-                        updateState = { compare.updateConvertState()
-                            navcontroller.navigate("convert")},
+                        updateState = {
+                            compare.updateConvertState()
+                            navcontroller.navigate("convert")
+                        },
                         text = "Convert",
                         width = 136,
                         height = 46
@@ -134,28 +134,43 @@ fun compareScreen(
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
                     Row {
-
+                        CustomTextField(compare.textSt.value,
+                            { state -> compare.onValueChange(state) })
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))
 
                     Row {
                         Text(
-                            text = "To",
+                            text = "Targeted Currency",
                             modifier = Modifier,
                             color = Color.Black,
                             fontSize = 14.sp,
                         )
-                        Spacer(modifier = Modifier.width(120.dp))
+                        Spacer(modifier = Modifier.width(80.dp))
                         Text(
-                            text = "Amount",
+                            text = "Targeted Currency",
                             modifier = Modifier,
                             color = Color.Black,
                             fontSize = 14.sp,
                         )
                     }
+                    Row {
+                        //2lists
+                    }
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row {
+                        CustomTextField(compare.textSts.value,
+                            { state -> compare.onValueChangeS(state) })
+                        Spacer(modifier = Modifier.width(60.dp))
+                        CustomTextField(compare.textStT.value,
+                            { state -> compare.onValueChangeT(state) })
+                    }
+
+
                 }
             }
 
