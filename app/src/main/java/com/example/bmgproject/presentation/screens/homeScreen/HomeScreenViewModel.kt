@@ -2,19 +2,96 @@ package com.example.bmgproject.presentation.screens.homeScreen
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.navigation.compose.rememberNavController
 
 class HomeScreenViewModel : ViewModel() {
 
     val textSts = mutableStateOf("1")
     val textSt = mutableStateOf("1")
     fun onValueChange(text: String) {
-        textSt.value = text
+        if (text.contains('*')
+                ) {
+            textSt.value = text.substring(0, text.indexOf('*'))
+
+        } else if (text.contains('#')) {
+            textSt.value = text.substring(0, text.indexOf('#'))
+        } else if (text.contains(',')
+        ) {
+            textSt.value = text.substring(0, text.indexOf(','))
+        } else if (text.contains('.')
+        ) {
+            textSt.value = text.substring(0, text.indexOf('.'))
+        } else if (text.contains(';')
+        ) {
+            textSt.value = text.substring(0, text.indexOf(';'))
+        } else if (text.contains('+')
+        ) {
+            textSt.value = text.substring(0, text.indexOf('+'))
+        } else if (text.contains('-')
+        ) {
+            textSt.value = text.substring(0, text.indexOf('-'))
+        } else if (text.contains('N')
+        ) {
+            textSt.value = text.substring(0, text.indexOf('N'))
+        } else if (text.contains(" ")
+        ) {
+            textSt.value = text.substring(0, text.indexOf(' '))
+        } else if (text.contains('/')
+        ) {
+            textSt.value = text.substring(0, text.indexOf('/'))
+        } else if (text.contains('(')
+        ) {
+            textSt.value = text.substring(0, text.indexOf('('))
+        }
+        else if (text.contains(')')
+        ) {
+            textSt.value = text.substring(0, text.indexOf(')'))
+        }
+        else {
+            textSt.value = text
+        }
     }
 
     fun onValueChangeS(text: String) {
-        textSts.value = text
-    }
+        if (text.contains('*')
+        ) {
+            textSts.value = text.substring(0, text.indexOf('*'))
+
+        } else if (text.contains('#')) {
+            textSts.value = text.substring(0, text.indexOf('#'))
+        } else if (text.contains(',')
+        ) {
+            textSts.value = text.substring(0, text.indexOf(','))
+        } else if (text.contains('.')
+        ) {
+            textSts.value = text.substring(0, text.indexOf('.'))
+        } else if (text.contains(';')
+        ) {
+            textSts.value = text.substring(0, text.indexOf(';'))
+        } else if (text.contains('+')
+        ) {
+            textSts.value = text.substring(0, text.indexOf('+'))
+        } else if (text.contains('-')
+        ) {
+            textSts.value = text.substring(0, text.indexOf('-'))
+        } else if (text.contains('N')
+        ) {
+            textSts.value = text.substring(0, text.indexOf('N'))
+        } else if (text.contains(" ")
+        ) {
+            textSts.value = text.substring(0, text.indexOf(' '))
+        } else if (text.contains('/')
+        ) {
+            textSts.value = text.substring(0, text.indexOf('/'))
+        } else if (text.contains('(')
+        ) {
+            textSts.value = text.substring(0, text.indexOf('('))
+        }else if (text.contains(')')
+        ) {
+            textSts.value = text.substring(0, text.indexOf(')'))
+        }
+        else {
+            textSts.value = text
+        }    }
 
     val expended = mutableStateOf(false)
     val selectedItem = mutableStateOf("--Not Selected--")
@@ -46,18 +123,18 @@ class HomeScreenViewModel : ViewModel() {
         expendedS.value = false
     }
 
-    var conversionSt = mutableStateOf(false)
+    private var conversionSt = mutableStateOf(false)
     fun updateConversionState(): Boolean {
         conversionSt.value = !conversionSt.value
         return conversionSt.value
     }
 
-    var convert = mutableStateOf(false)
+    private var convert = mutableStateOf(false)
     fun updateConvertState() {
         convert.value = !convert.value
     }
 
-    var compare = mutableStateOf(false)
+    private var compare = mutableStateOf(false)
     fun updateCompareState() {
         compare.value = !compare.value
     }

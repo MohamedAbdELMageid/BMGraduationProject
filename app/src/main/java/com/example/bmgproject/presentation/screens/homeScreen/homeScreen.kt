@@ -1,5 +1,6 @@
 package com.example.bmgproject.presentation.screens.homeScreen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,12 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import com.example.bmgproject.R
 import com.example.bmgproject.presentation.screens.reusableUI.CustomTextField
 import com.example.bmgproject.presentation.screens.reusableUI.DropDownList
 import com.example.bmgproject.presentation.screens.reusableUI.MainButton
@@ -31,35 +32,34 @@ import com.example.bmgproject.presentation.screens.reusableUI.SmallButton
 @Composable
 fun HomeScreen(
     updateConvertState: () -> Unit,
-    updateCompareState:()->Unit,
-    textSt:String,
-    onValueChange:(String)->Unit,
-    expended:Boolean,
-    selectedItem:String,
-    onExpendChange:()->Unit,
-    onDismissRequest:()->Unit,
-    onDropDownItemClick:(String)->Unit,
-    expendedS:Boolean,
-    selectedItemS:String,
-    onExpendChangeS:()->Unit,
-    onDismissRequestS:()->Unit,
-    onDropDownItemClickS:(String)->Unit,
-    textSts:String,
-    onValueChangeS:(String)->Unit,
-    updateConversionState:()->Unit,
-    onButtonNav:()->Unit
+    updateCompareState: () -> Unit,
+    textSt: String,
+    onValueChange: (String) -> Unit,
+    expended: Boolean,
+    selectedItem: String,
+    onExpendChange: () -> Unit,
+    onDismissRequest: () -> Unit,
+    onDropDownItemClick: (String) -> Unit,
+    expendedS: Boolean,
+    selectedItemS: String,
+    onExpendChangeS: () -> Unit,
+    onDismissRequestS: () -> Unit,
+    onDropDownItemClickS: (String) -> Unit,
+    textSts: String,
+    onValueChangeS: (String) -> Unit,
+    updateConversionState: () -> Unit,
+    onButtonNav: () -> Unit
 ) {
 
     Box(
         modifier = Modifier
             .height(405.dp)
             .fillMaxWidth()
-            .background(
-                brush = Brush.radialGradient(
-                    colors = listOf(Color(0xFF6A0E1C), Color(0xFF2A0F14))
-                )
-            )
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.background),
+            contentDescription = "Back Ground"
+        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -154,13 +154,13 @@ fun HomeScreen(
                     Spacer(modifier = Modifier.height(10.dp))
                     Row {
                         CustomTextField(textSt,
-                            { change ->onValueChange(change) })
+                            { change -> onValueChange(change) })
                         Spacer(modifier = Modifier.width(20.dp))
                         DropDownList(
                             expanded = expended,
                             selectedItem = selectedItem,
-                            onExpandedChange = {onExpendChange()},
-                            onDropDownMenuDismiss = {onDismissRequest()},
+                            onExpandedChange = { onExpendChange() },
+                            onDropDownMenuDismiss = { onDismissRequest() },
                             onDropDownItemClick = { click -> onDropDownItemClick(click) },
                             dropDownList = listOf("EGP", "USD")
                         )
@@ -215,5 +215,6 @@ fun HomeScreen(
             }
 
         }
+
     }
 }

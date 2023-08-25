@@ -1,5 +1,6 @@
 package com.example.bmgproject.presentation.screens.compareScreen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,11 +20,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.bmgproject.R
 import com.example.bmgproject.presentation.screens.reusableUI.CustomTextField
+import com.example.bmgproject.presentation.screens.reusableUI.DropDownList
+import com.example.bmgproject.presentation.screens.reusableUI.MainButton
 import com.example.bmgproject.presentation.screens.reusableUI.SmallButton
 
 @Composable
@@ -35,12 +41,12 @@ fun compareScreen(
         modifier = Modifier
             .height(405.dp)
             .fillMaxWidth()
-            .background(
-                brush = Brush.radialGradient(
-                    colors = listOf(Color(0xFF6A0E1C), Color(0xFF2A0F14))
-                )
-            )
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.background),
+            contentDescription = "Back Ground"
+        )
+    }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -106,7 +112,7 @@ fun compareScreen(
             Box(
                 modifier = Modifier
                     .width(350.dp)
-                    .height(409.dp)
+                    .height(800.dp)
                     .background(Color.White),
             ) {
                 Column(
@@ -138,6 +144,16 @@ fun compareScreen(
                     Row {
                         CustomTextField(compare.textSt.value,
                             { state -> compare.onValueChange(state) })
+                        Spacer(modifier = Modifier.width(20.dp))
+                        DropDownList(
+                            expanded = compare.expendedSt.value,
+                            selectedItem = compare.selectedItem.value,
+                            onExpandedChange = { compare.onExpendChange() },
+                            onDropDownMenuDismiss = { compare.onDropDownDismiss() },
+                            onDropDownItemClick ={selected->compare.onDropDownItemClick(selected)} ,
+                            dropDownList = listOf("EGP","USD"),
+                            width = 152
+                        )
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))
@@ -158,7 +174,25 @@ fun compareScreen(
                         )
                     }
                     Row {
-                        //2lists
+                        DropDownList(
+                            expanded = compare.expendedStS.value,
+                            selectedItem = compare.selectedItemS.value,
+                            onExpandedChange = { compare.onExpendedChangeS() },
+                            onDropDownMenuDismiss = { compare.onDropDownDismissS() },
+                            onDropDownItemClick = {selected->compare.onDropDownItemClickS(selected)},
+                            dropDownList = listOf("EGP","USD"),
+                            width = 152
+                        )
+                        Spacer(modifier = Modifier.width(20.dp))
+                        DropDownList(
+                            expanded = compare.expendedStT.value,
+                            selectedItem = compare.selectedItemT.value,
+                            onExpandedChange = { compare.onExpendedChangeT() },
+                            onDropDownMenuDismiss = { compare.onDropDownDismissT() },
+                            onDropDownItemClick = {selected->compare.onDropDownItemClickT(selected)},
+                            dropDownList = listOf("EGP","USD"),
+                            width = 152
+                        )
                     }
                     Spacer(modifier = Modifier.height(12.dp))
 
@@ -170,10 +204,11 @@ fun compareScreen(
                             { state -> compare.onValueChangeT(state) })
                     }
 
-
+                    Spacer(modifier = Modifier.height(20.dp))
+                    MainButton(updateState = { compare.updateState() }, text = "Compare")
                 }
             }
 
         }
-    }
+
 }

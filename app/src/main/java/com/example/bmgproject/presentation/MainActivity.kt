@@ -14,8 +14,8 @@ import com.example.bmgproject.presentation.screens.homeScreen.HomeScreen
 import com.example.bmgproject.presentation.screens.homeScreen.HomeScreenViewModel
 
 class MainActivity : ComponentActivity() {
-    val home by viewModels<HomeScreenViewModel>()
-    val compare by viewModels<CompareViewModel>()
+    private val home by viewModels<HomeScreenViewModel>()
+    private val compare by viewModels<CompareViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         home.textSts.value,
                         { change -> home.onValueChangeS(change) },
                         { home.updateConversionState() },
-                        onButtonNav = { onButtonNav(navController)})
+                        onButtonNav = { onButtonNav(navController) })
                 }
                 composable("convert") {
                     HomeScreen(
@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
                         home.textSts.value,
                         { change -> home.onValueChangeS(change) },
                         { home.updateConversionState() },
-                        onButtonNav = { onButtonNav(navController)})
+                        onButtonNav = { onButtonNav(navController) })
                 }
                 composable("compare") {
                     compareScreen(compare, navController)
@@ -71,6 +71,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-fun onButtonNav(navController: NavController){
+fun onButtonNav(navController: NavController) {
     navController.navigate("compare")
 }
