@@ -24,7 +24,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bmgproject.R
-import com.example.bmgproject.presentation.screens.reusableUI.CustomTextField
+import com.example.bmgproject.data.models.currenciesModel.currenciesList
+import com.example.bmgproject.presentation.screens.reusableUI.customTextField
 import com.example.bmgproject.presentation.screens.reusableUI.DropDownList
 import com.example.bmgproject.presentation.screens.reusableUI.MainButton
 import com.example.bmgproject.presentation.screens.reusableUI.SmallButton
@@ -36,19 +37,20 @@ fun HomeScreen(
     textSt: String,
     onValueChange: (String) -> Unit,
     expended: Boolean,
-    selectedItem: String,
+    selectedItem: currenciesList?,
     onExpendChange: () -> Unit,
     onDismissRequest: () -> Unit,
-    onDropDownItemClick: (String) -> Unit,
+    onDropDownItemClick: (currenciesList) -> Unit,
     expendedS: Boolean,
-    selectedItemS: String,
+    selectedItemS: currenciesList?,
     onExpendChangeS: () -> Unit,
     onDismissRequestS: () -> Unit,
-    onDropDownItemClickS: (String) -> Unit,
+    onDropDownItemClickS: (currenciesList) -> Unit,
     textSts: String,
     onValueChangeS: (String) -> Unit,
     updateConversionState: () -> Unit,
-    onButtonNav: () -> Unit
+    onButtonNav: () -> Unit,
+    dropDownList: List<currenciesList>
 ) {
 
     Box(
@@ -153,7 +155,7 @@ fun HomeScreen(
 
                     Spacer(modifier = Modifier.height(10.dp))
                     Row {
-                        CustomTextField(textSt,
+                        customTextField(textSt,
                             { change -> onValueChange(change) })
                         Spacer(modifier = Modifier.width(20.dp))
                         DropDownList(
@@ -162,7 +164,7 @@ fun HomeScreen(
                             onExpandedChange = { onExpendChange() },
                             onDropDownMenuDismiss = { onDismissRequest() },
                             onDropDownItemClick = { click -> onDropDownItemClick(click) },
-                            dropDownList = listOf("EGP", "USD")
+                            dropDownList = dropDownList
                         )
                     }
 
@@ -197,11 +199,12 @@ fun HomeScreen(
                                     click
                                 )
                             },
-                            dropDownList = listOf("EGP", "USD"),
+                            dropDownList = dropDownList
                         )
                         Spacer(modifier = Modifier.width(20.dp))
-                        CustomTextField(textSts,
-                            { change -> onValueChangeS(change) })
+                        customTextField(textSts,
+                            { change -> onValueChangeS(change) },
+                            height = 60)
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))

@@ -1,7 +1,11 @@
 package com.example.bmgproject.presentation.screens.homeScreen
 
+import androidx.activity.viewModels
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.bmgproject.data.models.currenciesModel.currenciesList
+import com.example.bmgproject.data.network.APIViewModel
 
 class HomeScreenViewModel : ViewModel() {
 
@@ -9,7 +13,7 @@ class HomeScreenViewModel : ViewModel() {
     val textSt = mutableStateOf("1")
     fun onValueChange(text: String) {
         if (text.contains('*')
-                ) {
+        ) {
             textSt.value = text.substring(0, text.indexOf('*'))
 
         } else if (text.contains('#')) {
@@ -41,12 +45,10 @@ class HomeScreenViewModel : ViewModel() {
         } else if (text.contains('(')
         ) {
             textSt.value = text.substring(0, text.indexOf('('))
-        }
-        else if (text.contains(')')
+        } else if (text.contains(')')
         ) {
             textSt.value = text.substring(0, text.indexOf(')'))
-        }
-        else {
+        } else {
             textSt.value = text
         }
     }
@@ -85,16 +87,16 @@ class HomeScreenViewModel : ViewModel() {
         } else if (text.contains('(')
         ) {
             textSts.value = text.substring(0, text.indexOf('('))
-        }else if (text.contains(')')
+        } else if (text.contains(')')
         ) {
             textSts.value = text.substring(0, text.indexOf(')'))
-        }
-        else {
+        } else {
             textSts.value = text
-        }    }
+        }
+    }
 
     val expended = mutableStateOf(false)
-    val selectedItem = mutableStateOf("--Not Selected--")
+    val selectedItem = mutableStateOf<currenciesList?>(null)
     fun onExpendChange() {
         expended.value = !expended.value
     }
@@ -103,13 +105,13 @@ class HomeScreenViewModel : ViewModel() {
         expended.value = false
     }
 
-    fun onDropDownItemClick(selected: String) {
+    fun onDropDownItemClick(selected: currenciesList) {
         selectedItem.value = selected
         expended.value = false
     }
 
     val expendedS = mutableStateOf(false)
-    val selectedItemS = mutableStateOf("--Not Selected--")
+    val selectedItemS = mutableStateOf<currenciesList?>(null)
     fun onExpendChangeS() {
         expendedS.value = !expendedS.value
     }
@@ -118,24 +120,41 @@ class HomeScreenViewModel : ViewModel() {
         expendedS.value = false
     }
 
-    fun onDropDownItemClickS(selected: String) {
+    fun onDropDownItemClickS(selected: currenciesList) {
         selectedItemS.value = selected
         expendedS.value = false
     }
 
-    private var conversionSt = mutableStateOf(false)
-    fun updateConversionState(): Boolean {
-        conversionSt.value = !conversionSt.value
-        return conversionSt.value
+    private var convert = mutableStateOf(false)
+    fun updateConvertState(): Boolean {
+        convert.value = !convert.value
+        return convert.value
     }
 
-    private var convert = mutableStateOf(false)
-    fun updateConvertState() {
-        convert.value = !convert.value
-    }
+
 
     private var compare = mutableStateOf(false)
     fun updateCompareState() {
         compare.value = !compare.value
+    }
+
+    private var con =0.0
+    private var conversion = mutableStateOf(false)
+    fun updateConversionState(home: HomeScreenViewModel,api:APIViewModel) {
+        if (home.textSt.value.isNotEmpty() &&
+            home.selectedItem.value != null &&
+            home.selectedItemS.value != null) {
+            api.convertTwoCurrencies(
+                home.selectedItem.value!!.headLine,
+                home.selectedItemS.value!!.headLine,
+                home.textSt.value,
+            )
+
+
+
+            conversion.value = !conversion.value
+        }else {
+            conversion.value=false
+        }
     }
 }

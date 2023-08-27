@@ -2,6 +2,7 @@ package com.example.bmgproject.presentation.screens.compareScreen
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.bmgproject.data.models.currenciesModel.currenciesList
 
 class CompareViewModel : ViewModel() {
     private var convert = mutableStateOf(false)
@@ -146,48 +147,54 @@ class CompareViewModel : ViewModel() {
         }
     }
 
-    var expendedStT= mutableStateOf(false)
-    var selectedItemT= mutableStateOf("--Not Selected")
-
-    fun onExpendedChangeT(){
-        expendedStT.value=!expendedStT.value
-    }
-    fun onDropDownDismissT(){
-        expendedStT.value=false
-    }
-    fun onDropDownItemClickT(selected:String){
-        selectedItemT.value=selected
-        expendedStT.value=false
-    }
 
     var expendedSt= mutableStateOf(false)
-    var selectedItem= mutableStateOf("--Not Selected--")
+    var selectedItem= mutableStateOf<currenciesList?>(null)
     fun onExpendChange(){
         expendedSt.value=!expendedSt.value
     }
     fun onDropDownDismiss(){
         expendedSt.value=false
     }
-    fun onDropDownItemClick(selected:String){
+    fun onDropDownItemClick(selected:currenciesList){
         selectedItem.value=selected
         expendedSt.value=false
     }
 
     var expendedStS= mutableStateOf(false)
-    var selectedItemS= mutableStateOf("--Not Selected--")
+    var selectedItemS= mutableStateOf<currenciesList?>(null)
     fun onExpendedChangeS(){
         expendedStS.value=!expendedStS.value
     }
     fun onDropDownDismissS(){
         expendedStS.value=false
     }
-    fun onDropDownItemClickS(selected:String){
+    fun onDropDownItemClickS(selected:currenciesList){
         selectedItemS.value=selected
         expendedStS.value=false
+    }
+
+    var expendedStT= mutableStateOf(false)
+    var selectedItemT= mutableStateOf<currenciesList?>(null)
+    fun onExpendedChangeT(){
+        expendedStT.value=!expendedStT.value
+    }
+    fun onDropDownDismissT(){
+        expendedStT.value=false
+    }
+
+
+    fun onDropDownItemClickT(selected:currenciesList){
+        selectedItemT.value=selected
+        expendedStT.value=false
     }
 
     var buttonState= mutableStateOf(false)
     fun updateState(){
         buttonState.value=!buttonState.value
     }
+
+
+
+
 }
