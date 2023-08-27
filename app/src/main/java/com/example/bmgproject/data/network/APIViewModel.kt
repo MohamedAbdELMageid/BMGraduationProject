@@ -16,7 +16,6 @@ class APIViewModel() : ViewModel() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    var customValue = mutableStateOf("")
     var customCurrenciessList = mutableStateOf<List<currenciesList>>(emptyList())
 
     private val network: NetworkServices = retrofit.create(NetworkServices::class.java)
@@ -24,6 +23,12 @@ class APIViewModel() : ViewModel() {
 
     private val mutableResultFlow = MutableStateFlow<String?>(null)
     val resultFlow: StateFlow<String?> = mutableResultFlow
+
+    private val mutableResultFlowF = MutableStateFlow<String?>(null)
+    val resultFlowF: StateFlow<String?> = mutableResultFlowF
+
+    private val mutableResultFlowS = MutableStateFlow<String?>(null)
+    val resultFlowS: StateFlow<String?> = mutableResultFlowS
 
     init {
         viewModelScope.launch {
@@ -55,12 +60,24 @@ class APIViewModel() : ViewModel() {
             val result =
                 network.convertTwoCurrencies(base, countryOne, amount).conversion_value.toString()
             mutableResultFlow.value = result
-            //var transform=total.map {
-            //conversionMap(
-            //value = it.toString()
-            //)
-            //}
-            //customValue.value = transform.toString()
+        }
+
+    }
+
+    fun convertFirstCurrencies(base: String, countryOne: String, amount: String) {
+        viewModelScope.launch {
+            val result =
+                network.convertTwoCurrencies(base, countryOne, amount).conversion_value.toString()
+            mutableResultFlowF.value = result
+        }
+
+    }
+
+    fun convertSecondCurrencies(base: String, countryOne: String, amount: String) {
+        viewModelScope.launch {
+            val result =
+                network.convertTwoCurrencies(base, countryOne, amount).conversion_value.toString()
+            mutableResultFlowS.value = result
         }
 
     }

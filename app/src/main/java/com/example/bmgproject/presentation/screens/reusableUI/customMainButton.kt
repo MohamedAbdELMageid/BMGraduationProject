@@ -15,7 +15,7 @@ fun MainButton(
     updateState: () -> Unit,
     text: String,
     width: Int = 315,
-    height: Int = 48,
+    height: Int = 66,
 ) {
     Button(
         colors = ButtonDefaults.buttonColors(Color.Black),

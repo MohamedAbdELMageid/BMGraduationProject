@@ -2,10 +2,12 @@ package com.example.bmgproject.presentation.screens.reusableUI
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,23 +36,28 @@ fun DropDownList(
     onDropDownMenuDismiss: () -> Unit = {},
     onDropDownItemClick: (currenciesList) -> Unit = {},
     dropDownList: List<currenciesList>,
-    width: Int = 184,
-    height: Int = 60
+    width: Int = 140,
+    height: Int = 55
 ) {
     Row(
         modifier = Modifier
+            .padding(10.dp)
             .width(width.dp)
             .height(height.dp)
+            .clip(RoundedCornerShape(20.dp))
+            .border(2.dp, color = Color.LightGray)
+
     ) {
         Row(modifier = Modifier
             .fillMaxSize()
+            //.border(1.dp, color = Color.Black)
             .clickable {
                 onExpandedChange()
             }
-            .padding(12.dp)
+            //.padding(12.dp)
 
             .clip(RoundedCornerShape(10.dp))
-            .background(Color.LightGray)
+            .background(Color.White)
             .padding(8.dp)) {
             if (selectedItem != null) {
                 Image(

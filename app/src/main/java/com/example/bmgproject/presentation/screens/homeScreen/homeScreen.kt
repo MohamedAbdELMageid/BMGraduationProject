@@ -55,7 +55,7 @@ fun HomeScreen(
 
     Box(
         modifier = Modifier
-            .height(405.dp)
+            .height(450.dp)
             .fillMaxWidth()
     ) {
         Image(
@@ -144,7 +144,7 @@ fun HomeScreen(
                             color = Color.Black,
                             fontSize = 14.sp,
                         )
-                        Spacer(modifier = Modifier.width(120.dp))
+                        Spacer(modifier = Modifier.width(130.dp))
                         Text(
                             text = "From",
                             modifier = Modifier,
@@ -177,7 +177,7 @@ fun HomeScreen(
                             color = Color.Black,
                             fontSize = 14.sp,
                         )
-                        Spacer(modifier = Modifier.width(120.dp))
+                        Spacer(modifier = Modifier.width(155.dp))
                         Text(
                             text = "Amount",
                             modifier = Modifier,
@@ -204,7 +204,7 @@ fun HomeScreen(
                         Spacer(modifier = Modifier.width(20.dp))
                         customTextField(textSts,
                             { change -> onValueChangeS(change) },
-                            height = 60)
+                            )
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))

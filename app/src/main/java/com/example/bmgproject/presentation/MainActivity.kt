@@ -27,6 +27,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             val newResult = api.resultFlow.collectAsState()
             home.textSts.value=newResult.value ?: "1"
+
+            val newResultS = api.resultFlowF.collectAsState()
+            compare.textSts.value=newResultS.value ?: "1"
+
+            val newResultT = api.resultFlowS.collectAsState()
+            compare.textStT.value=newResultT.value ?: "1"
+
             val navController = rememberNavController()
             NavHost(navController = navController, startDestination = "home") {
                 composable("home") {

@@ -152,7 +152,6 @@ fun compareScreen(
                         onDropDownMenuDismiss = { compare.onDropDownDismiss() },
                         onDropDownItemClick = { selected -> compare.onDropDownItemClick(selected) },
                         dropDownList = api.customCurrenciessList.value,
-                        width = 152
                     )
                 }
 
@@ -181,7 +180,6 @@ fun compareScreen(
                         onDropDownMenuDismiss = { compare.onDropDownDismissS() },
                         onDropDownItemClick = { selected -> compare.onDropDownItemClickS(selected) },
                         dropDownList = api.customCurrenciessList.value,
-                        width = 152
                     )
                     Spacer(modifier = Modifier.width(20.dp))
                     DropDownList(
@@ -204,7 +202,7 @@ fun compareScreen(
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
-                MainButton(updateState = { compare.updateState() }, text = "Compare")
+                MainButton(updateState = { compare.updateState(api) }, text = "Compare")
 
 
             }

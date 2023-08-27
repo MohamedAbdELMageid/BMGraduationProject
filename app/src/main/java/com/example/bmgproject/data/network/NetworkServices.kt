@@ -27,4 +27,18 @@ interface NetworkServices {
         @Query("toCurrency") countryOne: String,
         @Query("amount") amount: String
     ): conversionValue
+
+    @GET("currency/convert?")
+    suspend fun convertFirstCurrencies(
+        @Query("fromCurrency") base: String,
+        @Query("toCurrency") countryOne: String,
+        @Query("amount") amount: String
+    ): conversionValue
+
+    @GET("currency/convert?")
+    suspend fun convertSecondCurrencies(
+        @Query("fromCurrency") base: String,
+        @Query("toCurrency") countryOne: String,
+        @Query("amount") amount: String
+    ): conversionValue
 }

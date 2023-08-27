@@ -149,9 +149,6 @@ class HomeScreenViewModel : ViewModel() {
                 home.selectedItemS.value!!.headLine,
                 home.textSt.value,
             )
-
-
-
             conversion.value = !conversion.value
         }else {
             conversion.value=false
