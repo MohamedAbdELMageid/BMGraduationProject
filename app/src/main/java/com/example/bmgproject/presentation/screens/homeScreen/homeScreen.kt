@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -28,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import com.example.bmgproject.R
 import com.example.bmgproject.data.models.currenciesModel.currenciesList
 import com.example.bmgproject.data.network.APIViewModel
@@ -236,11 +238,16 @@ fun HomeScreen(
                         text = "Add To Favorites",
                         width = 160)
                 }
-                LazyColumn{
-                    items(api.savedCurrency.value){
+                LazyColumn(modifier = Modifier.fillMaxSize()){
+                    items(api.customCurrenciessList.value){
                         item ->
                         androidx.compose.material3.ListItem(
-                            headlineText = { item.code })
+                            headlineText = { Text(text = item.headLine) },
+                            leadingContent = { Image(
+                                modifier = Modifier.size(30.dp),
+                                painter = rememberAsyncImagePainter(model =item.Icon ),
+                                contentDescription = "")})
+
                     }
                 }
             }
