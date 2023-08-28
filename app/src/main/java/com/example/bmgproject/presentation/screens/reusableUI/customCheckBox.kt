@@ -8,11 +8,11 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun customCheckBox(
     checkSt: Boolean = false,
-    onChecked: () -> Unit = {},
+    onChecked: (Boolean) -> Unit = {},
 ) {
     Checkbox(
         checked = checkSt,
-        onCheckedChange = { onChecked() },
+        onCheckedChange = { onChecked(it) },
         colors = CheckboxDefaults.colors(
             checkedColor = Color.Green,
             uncheckedColor = Color.Gray
