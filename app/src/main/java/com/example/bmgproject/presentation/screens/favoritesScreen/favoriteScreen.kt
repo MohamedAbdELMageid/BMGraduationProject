@@ -43,26 +43,26 @@ fun FavoritesScreen(api: APIViewModel, favorites: FavoritesScreenViewModel) {
                 .background(Color.LightGray)
         ) {
             LazyColumn {
-                items(api.customCurrenciessList.value) {
+                items(api.customCurrenciessList.value) { item ->
                     androidx.compose.material3.ListItem(
-                        headlineText = { Text(text = it.headLine) },
+                        headlineText = { Text(text = item.headLine) },
                         leadingContent = {
                             Image(
                                 modifier = Modifier.size(50.dp),
-                                painter = rememberAsyncImagePainter(model = it.Icon),
+                                painter = rememberAsyncImagePainter(model = item.Icon),
                                 contentDescription = ""
                             )
 
                         },
                         trailingContent = {
                             var checkedState by remember {
-                                mutableStateOf(it.state)
+                                mutableStateOf(item.state)
                             }
                             customCheckBox(
                                 checkSt = checkedState,
                                 onChecked = {
-                                checkedState = it
-                                    favorites.onChecked(it)
+                                    checkedState = it
+                                    api.updateItem(item, it)
                                 })
                         },
                     )
@@ -71,4 +71,3 @@ fun FavoritesScreen(api: APIViewModel, favorites: FavoritesScreenViewModel) {
         }
     }
 }
-

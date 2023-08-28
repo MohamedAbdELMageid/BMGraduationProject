@@ -7,8 +7,5 @@ import androidx.room.PrimaryKey
 data class Currency(
     @PrimaryKey
     var code: String,
-    val flagUrl: String,
-    val desc: String,
-    var isSaved:Boolean = false,
-    var amount:Double=0.0
+    var isSaved: Boolean = false,
 )
