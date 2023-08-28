@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
             NavHost(navController = navController, startDestination = "home") {
                 composable("home") {
                     HomeScreen(
+                        api,
                         { home.updateConvertState() },
                         { home.updateCompareState() },
                         home.textSt.value,
@@ -57,11 +58,12 @@ class MainActivity : ComponentActivity() {
                         { home.updateConversionState(home, api) },
                         onButtonNav = { onButtonNav(navController) },
                         onFavButtonNav = { onFavButtonNav(navController) },
-                        api.customCurrenciessList.value
+                        api.customCurrenciessList.value,
                     )
                 }
                 composable("convert") {
                     HomeScreen(
+                        api,
                         { home.updateConvertState() },
                         { home.updateCompareState() },
                         home.textSt.value,
@@ -81,7 +83,7 @@ class MainActivity : ComponentActivity() {
                         { home.updateConversionState(home, api) },
                         onButtonNav = { onButtonNav(navController) },
                         onFavButtonNav = { onFavButtonNav(navController) },
-                        api.customCurrenciessList.value
+                        api.customCurrenciessList.value,
                     )
                 }
                 composable("compare") {

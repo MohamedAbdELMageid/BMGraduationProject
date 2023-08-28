@@ -36,6 +36,8 @@ class APIViewModel : ViewModel() {
     private val network: NetworkServices = retrofit.create(NetworkServices::class.java)
 
 
+    var savedCurrency= mutableStateOf<List<Currency>>(emptyList())
+
     private val mutableResultFlow = MutableStateFlow<String?>(null)
     val resultFlow: StateFlow<String?> = mutableResultFlow
 
@@ -48,6 +50,7 @@ class APIViewModel : ViewModel() {
     lateinit var currencies: Currencies
 
     init {
+        getAllCurrenciesFromDB()
         viewModelScope.launch {
 
 
@@ -127,6 +130,12 @@ class APIViewModel : ViewModel() {
             )
             val list = repo.getSavedCurrencies()
             publishSavedItems(currencies, list)
+        }
+    }
+
+    fun getAllCurrenciesFromDB(){
+        viewModelScope.launch {
+            savedCurrency.value=repo.getSavedCurrencies()
         }
     }
 }
