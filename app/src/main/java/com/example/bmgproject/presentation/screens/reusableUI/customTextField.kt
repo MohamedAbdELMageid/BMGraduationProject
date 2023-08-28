@@ -28,9 +28,11 @@ fun customTextField(
     textSt: String = "1",
     onValueChange: (String) -> Unit = {},
     width: Int = 140,
-    height: Int = 55
+    height: Int = 55,
+    readonly:Boolean=false
 ) {
     TextField(
+        readOnly = readonly,
         value = textSt,
         onValueChange = { onValueChange(it) },
         keyboardOptions = KeyboardOptions(
@@ -48,7 +50,7 @@ fun customTextField(
             .background(
                 Color.White
             )
-            .clip(RoundedCornerShape(50.dp)),
-        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White),
+            .clip(RoundedCornerShape(30.dp)),
+        colors = TextFieldDefaults.textFieldColors(containerColor = Color.White)
     )
 }

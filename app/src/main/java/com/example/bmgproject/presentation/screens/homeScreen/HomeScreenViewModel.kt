@@ -1,7 +1,5 @@
 package com.example.bmgproject.presentation.screens.homeScreen
 
-import androidx.activity.viewModels
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.bmgproject.data.models.currenciesModel.currenciesList
@@ -132,26 +130,25 @@ class HomeScreenViewModel : ViewModel() {
     }
 
 
-
     private var compare = mutableStateOf(false)
     fun updateCompareState() {
         compare.value = !compare.value
     }
 
-    private var con =0.0
     private var conversion = mutableStateOf(false)
-    fun updateConversionState(home: HomeScreenViewModel,api:APIViewModel) {
+    fun updateConversionState(home: HomeScreenViewModel, api: APIViewModel) {
         if (home.textSt.value.isNotEmpty() &&
             home.selectedItem.value != null &&
-            home.selectedItemS.value != null) {
+            home.selectedItemS.value != null
+        ) {
             api.convertTwoCurrencies(
                 home.selectedItem.value!!.headLine,
                 home.selectedItemS.value!!.headLine,
                 home.textSt.value,
             )
             conversion.value = !conversion.value
-        }else {
-            conversion.value=false
+        } else {
+            conversion.value = false
         }
     }
 }

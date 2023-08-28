@@ -86,7 +86,7 @@ fun compareScreen(
                         50
                     )
                 )
-                .background(Color.LightGray)
+                .background(Color.White)
         ) {
             Row {
                 SmallButton(
@@ -195,10 +195,12 @@ fun compareScreen(
 
                 Row {
                     customTextField(compare.textSts.value,
-                        { state -> compare.onValueChangeS(state) })
+                        { state -> compare.onValueChangeS(state) },
+                        readonly = true)
                     Spacer(modifier = Modifier.width(60.dp))
                     customTextField(compare.textStT.value,
-                        { state -> compare.onValueChangeT(state) })
+                        { state -> compare.onValueChangeT(state) },
+                        readonly = true)
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
