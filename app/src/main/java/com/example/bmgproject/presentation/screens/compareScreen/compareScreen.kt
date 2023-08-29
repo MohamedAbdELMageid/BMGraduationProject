@@ -54,6 +54,7 @@ fun compareScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(80.dp))
         Box(
             modifier = Modifier
                 .width(318.dp)
@@ -77,6 +78,7 @@ fun compareScreen(
                 )
             }
         }
+        Spacer(modifier = Modifier.height(65.dp))
         Box(
             modifier = Modifier
                 .width(275.dp)

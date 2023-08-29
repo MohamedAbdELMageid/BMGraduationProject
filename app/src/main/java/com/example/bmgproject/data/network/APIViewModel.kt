@@ -23,20 +23,20 @@ class APIViewModel : ViewModel() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val db = Room.databaseBuilder(
+    private val db = Room.databaseBuilder(
         AppContext.appContext,
         CurrencyDatabase::class.java,
         "currency_db"
     ).fallbackToDestructiveMigration().build()
 
 
-    val repo = Repository(database = db)
+    private val repo = Repository(database = db)
     var customCurrenciessList = mutableStateOf<List<currenciesList>>(emptyList())
 
     private val network: NetworkServices = retrofit.create(NetworkServices::class.java)
 
 
-    var savedCurrency= mutableStateOf<List<Currency>>(emptyList())
+    private var savedCurrency= mutableStateOf<List<Currency>>(emptyList())
 
     private val mutableResultFlow = MutableStateFlow<String?>(null)
     val resultFlow: StateFlow<String?> = mutableResultFlow
@@ -47,7 +47,7 @@ class APIViewModel : ViewModel() {
     private val mutableResultFlowS = MutableStateFlow<String?>(null)
     val resultFlowS: StateFlow<String?> = mutableResultFlowS
 
-    lateinit var currencies: Currencies
+    private lateinit var currencies: Currencies
 
     init {
         getAllCurrenciesFromDB()
@@ -81,22 +81,12 @@ class APIViewModel : ViewModel() {
         customCurrenciessList.value = transform
     }
 
-    fun getExchangeRates(base: String) {
-        viewModelScope.launch {
-            network.getExchangeRates(base)
-        }
-    }
 
-    fun getTwoExchangeRates(base: String, countryOne: String, countryTwo: String) {
-        viewModelScope.launch {
-            network.getTwoExchangeRates(base, countryOne, countryTwo)
-        }
-    }
 
     fun convertTwoCurrencies(base: String, countryOne: String, amount: String) {
         viewModelScope.launch {
             val result =
-                network.convertTwoCurrencies(base, countryOne, amount).conversion_value.toString()
+                network.convertTwoCurrencies(base, countryOne, amount).conversion_result.toString()
             mutableResultFlow.value = result
         }
 
@@ -105,7 +95,7 @@ class APIViewModel : ViewModel() {
     fun convertFirstCurrencies(base: String, countryOne: String, amount: String) {
         viewModelScope.launch {
             val result =
-                network.convertTwoCurrencies(base, countryOne, amount).conversion_value.toString()
+                network.convertTwoCurrencies(base, countryOne, amount).conversion_result.toString()
             mutableResultFlowF.value = result
         }
 
@@ -114,7 +104,7 @@ class APIViewModel : ViewModel() {
     fun convertSecondCurrencies(base: String, countryOne: String, amount: String) {
         viewModelScope.launch {
             val result =
-                network.convertTwoCurrencies(base, countryOne, amount).conversion_value.toString()
+                network.convertTwoCurrencies(base, countryOne, amount).conversion_result.toString()
             mutableResultFlowS.value = result
         }
 
@@ -133,7 +123,7 @@ class APIViewModel : ViewModel() {
         }
     }
 
-    fun getAllCurrenciesFromDB(){
+    private fun getAllCurrenciesFromDB(){
         viewModelScope.launch {
             savedCurrency.value=repo.getSavedCurrencies()
         }

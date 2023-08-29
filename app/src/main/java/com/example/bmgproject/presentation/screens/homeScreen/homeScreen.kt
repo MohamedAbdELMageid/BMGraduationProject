@@ -106,6 +106,7 @@ fun HomeScreen(
                 )
             }
         }
+        Spacer(modifier = Modifier.height(80.dp))
         Box(
             modifier = Modifier
                 .width(275.dp)
