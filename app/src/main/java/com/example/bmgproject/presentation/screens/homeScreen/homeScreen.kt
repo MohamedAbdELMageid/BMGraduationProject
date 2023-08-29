@@ -3,6 +3,7 @@ package com.example.bmgproject.presentation.screens.homeScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,7 +19,6 @@ import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,12 +37,11 @@ import com.example.bmgproject.presentation.screens.reusableUI.DropDownList
 import com.example.bmgproject.presentation.screens.reusableUI.MainButton
 import com.example.bmgproject.presentation.screens.reusableUI.SmallButton
 import com.example.bmgproject.presentation.screens.reusableUI.customTextField
-import androidx.compose.foundation.layout.Box as Box
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    api:APIViewModel,
+    api: APIViewModel,
     updateConvertState: () -> Unit,
     updateCompareState: () -> Unit,
     textSt: String,
@@ -61,7 +60,7 @@ fun HomeScreen(
     onValueChangeS: (String) -> Unit,
     updateConversionState: () -> Unit,
     onButtonNav: () -> Unit,
-    onFavButtonNav:()->Unit,
+    onFavButtonNav: () -> Unit,
     dropDownList: List<currenciesList>
 ) {
 
@@ -233,21 +232,24 @@ fun HomeScreen(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(text = "live exchange rates")
                     Spacer(modifier = Modifier.width(35.dp))
-                    Image(imageVector = Icons.Filled.AddCircle , contentDescription = "")
+                    Image(imageVector = Icons.Filled.AddCircle, contentDescription = "")
                     SmallButton(
                         updateState = { onFavButtonNav() },
-                        text = "Add To Favorites",
-                        width = 160)
+                        text = "Favorites",
+                        width = 110
+                    )
                 }
-                LazyColumn(modifier = Modifier.fillMaxSize()){
-                    items(api.customCurrenciessList.value){
-                        item ->
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(api.customCurrenciessList.value) { item ->
                         androidx.compose.material3.ListItem(
                             headlineText = { Text(text = item.headLine) },
-                            leadingContent = { Image(
-                                modifier = Modifier.size(30.dp),
-                                painter = rememberAsyncImagePainter(model =item.Icon ),
-                                contentDescription = "")})
+                            leadingContent = {
+                                Image(
+                                    modifier = Modifier.size(30.dp),
+                                    painter = rememberAsyncImagePainter(model = item.Icon),
+                                    contentDescription = ""
+                                )
+                            })
 
                     }
                 }
@@ -256,6 +258,3 @@ fun HomeScreen(
 
     }
 }
-
-
-
